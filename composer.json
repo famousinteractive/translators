@@ -1,5 +1,6 @@
 {
     "name": "famous/translators",
+    "type": "library",
     "description": "Allow to use an external service to update the translation",
     "require": {
         "laravel/laravel": "^5.4",
@@ -11,6 +12,5 @@
             "name": "Jérémy Dillenbourg",
             "email": "jeremy.dillenbourg@famousgrey.com"
         }
-    ],
-    "minimum-stability": "dev"
+    ]
 }
