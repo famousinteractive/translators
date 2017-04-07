@@ -6,5 +6,5 @@
  * Time: 14:06
  */
 
-Route::get('famousTranslators', 'Famous\Translators\Controllers\ApiController@getTranslation');
-Route::post('famousTranslators', 'Famous\Translators\Controllers\ApiController@postTranslation');
+Route::get('famousTranslators', 'Famousinteractive\Translators\Controllers\ApiController@getTranslation');
+Route::post('famousTranslators', 'Famousinteractive\Translators\Controllers\ApiController@postTranslation');

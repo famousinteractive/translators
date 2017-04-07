@@ -10,9 +10,9 @@ namespace Famousinteractive\Translators\Controllers;
 
 
 use App\Http\Controllers\Controller;
-use Famous\Translators\Library\Api;
-use Famous\Translators\Library\FileParser;
-use Famous\Translators\Library\FileWriter;
+use Famousinteractive\Translators\Library\Api;
+use Famousinteractive\Translators\Library\FileParser;
+use Famousinteractive\Translators\Library\FileWriter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
