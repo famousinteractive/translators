@@ -6,7 +6,7 @@
  * Time: 14:01
  */
 
-namespace Famous\Translators\Controllers;
+namespace Famousinteractive\Translators\Controllers;
 
 
 use App\Http\Controllers\Controller;

@@ -6,7 +6,7 @@
  * Time: 14:02
  */
 
-namespace Famous\Translators\Library;
+namespace Famousinteractive\Translators\Library;
 
 class FileWriter
 {

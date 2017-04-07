@@ -6,10 +6,8 @@
  * Time: 14:01
  */
 
-namespace Famous\Translators\Library;
+namespace Famousinteractive\Translators\Library;
 
-
-use League\Flysystem\File;
 
 class Api
 {

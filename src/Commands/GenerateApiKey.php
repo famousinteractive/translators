@@ -1,6 +1,6 @@
 <?php
 
-namespace Famous\Translators\Commands;
+namespace Famousinteractive\Translators\Commands;
 
 use Illuminate\Console\Command;
 

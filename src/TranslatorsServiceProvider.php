@@ -1,6 +1,6 @@
 <?php
 
-namespace Famous\Translators;
+namespace Famousinteractive\Translators;
 
 use Illuminate\Support\ServiceProvider;
 

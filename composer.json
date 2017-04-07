@@ -1,5 +1,5 @@
 {
-    "name": "famous/translators",
+    "name": "famousinteractive/translators",
     "type": "library",
     "description": "Allow to use an external service to update the translation",
     "require": {
