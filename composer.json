@@ -3,7 +3,6 @@
     "type": "library",
     "description": "Allow to use an external service to update the translation",
     "require": {
-        "laravel/laravel": "5.4.*",
         "php": ">=5.6"
     },
     "license": "GPL-3.0+",
