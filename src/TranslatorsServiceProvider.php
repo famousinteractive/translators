@@ -30,7 +30,7 @@ class TranslatorsServiceProvider extends ServiceProvider
     {
         include __DIR__.'/routes.php';
 
-        $this->app->make('Famous\Translators\Controllers\ApiController');
+        $this->app->make('Famousinteractive\Translators\Controllers\ApiController');
         $this->commands($this->commands);
     }
 }
