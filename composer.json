@@ -13,10 +13,8 @@
         }
     ],
     "autoload": {
-        "autoload": {
-            "psr-4": {
-                "FamousInteractive\\Translators\\": "src/"
-            }
+        "psr-4": {
+            "FamousInteractive\\Translators\\": "src/"
         }
     }
 }
