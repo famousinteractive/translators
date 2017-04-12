@@ -36,7 +36,9 @@ class FileParser
 
                     if(file_exists($filePath) && $file != '.' && $file != '..') {
                         $content = include $filePath;
-                        $this->parser($lang, preg_replace("/\\.[^.]+$/", "", $file), $content);
+                        if(is_array($content)) {
+                            $this->parser($lang, preg_replace("/\\.[^.]+$/", "", $file), $content);
+                        }
                     }
                 }
             }
@@ -68,7 +70,7 @@ class FileParser
      * @param $file
      * @param string $content
      */
-    protected function parser($lang, $file, $content = '') {
+    protected function parser($lang, $file, $content = []) {
 
         foreach($content as $key=>$value) {
             $this->recursiveParser($lang, $file,$key, $value);
