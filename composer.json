@@ -11,5 +11,10 @@
             "name": "Jérémy Dillenbourg",
             "email": "jeremy.dillenbourg@famousgrey.com"
         }
-    ]
+    ],
+    "autoload": {
+        "autoload": {
+            "psr-4": {"FamousInteractive\\Translators\\": "src"}
+        }
+    }
 }
