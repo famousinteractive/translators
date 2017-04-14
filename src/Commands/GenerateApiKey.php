@@ -49,8 +49,8 @@ class GenerateApiKey extends Command
             'key'         => \Hash::make($key),
         ];
 
-        $fp = fopen(__DIR__ . '/../ApiCredential.php' , 'w');
-        fwrite($fp, '<?php $credential = ' . var_export( $credentials, true) . ';');
+        $fp = fopen(config_path('famousTranslator.php') , 'w');
+        fwrite($fp, '<?php return ' . var_export( $credentials, true) . ';');
         fclose($fp);
 
         $this->alert('Your client id is ' . $clientId);

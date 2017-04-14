@@ -18,7 +18,9 @@ class TranslatorsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->publishes([
+            __DIR__.'/Config/famousTranslator.php' => config_path('famousTranslator.php'),
+        ]);
     }
 
     /**

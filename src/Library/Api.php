@@ -34,9 +34,11 @@ class Api
      */
     public function checkCredential($clientId, $apiKey) {
 
-        require __DIR__ .'/../ApiCredential.php';
+        $configClientId = config('famousTranslator.clientId');
+        $configKey = config('famousTranslator.key');
 
-        if($credential['clientId'] == $clientId && \Hash::check($apiKey, $credential['key'])) {
+
+        if($configClientId == $clientId && \Hash::check($apiKey, $configKey)) {
             return true;
         }
 
