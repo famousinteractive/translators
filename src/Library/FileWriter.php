@@ -34,9 +34,12 @@ class FileWriter
 
         $content = $this->recursiveArrayUpdate($key, $content, 0, $value);
 
-        $fp = fopen($path , 'w');
-        fwrite($fp, '<?php return ' . var_export( $content, true) . ';');
-        fclose($fp);
+        if(!empty($content) && !is_null($content)) {
+
+            $fp = fopen($path, 'w');
+            fwrite($fp, '<?php return ' . var_export($content, true) . ';');
+            fclose($fp);
+        }
 
         return $this;
     }
