@@ -26,13 +26,11 @@ class FileWriter
      */
     public function updateFiles($file, $lang, $key, $value) {
 
-        $key = explode('.', $key);
-
         $path = $this->langPath . '/'.$lang . '/' . $file . '.php';
 
         $content = include $path;
 
-        $content = $this->recursiveArrayUpdate($key, $content, 0, $value);
+        array_set($content, $key, $value);
 
         if(!empty($content) && !is_null($content)) {
 
@@ -43,31 +41,4 @@ class FileWriter
 
         return $this;
     }
-
-    /**
-     * @param $key
-     * @param $content
-     * @param $keyIncrement
-     * @param $value
-     * @return mixed
-     */
-    protected function recursiveArrayUpdate($key, $content, $keyIncrement, $value) {
-
-        foreach($content as $k=>$v) {
-
-            if($k == $key[$keyIncrement]) {
-                if(is_array($v)) {
-                    $this->recursiveArrayUpdate($key, $content, ++$keyIncrement, $value);
-                } else {
-                    $content[$k] = $value;
-                    return $content;
-                }
-            }
-        }
-    }
-
-
-
-
-
 }
