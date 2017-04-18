@@ -19,5 +19,5 @@ In addition of the translators, you can use the database content manager in orde
    
    - Add `'Fitrans'   => Famousinteractive\Translators\Helpers\Trans::class` in your Alias in config/app.php file
    
-   - Use `fit()` in the view
+   - Use `fitrans($key = 'mypage.section1.title', [optional]  $default = 'default value', [optional]  $parameters = ['key' => 'value'], [optional] $lang = 'fr')` in the view
     
