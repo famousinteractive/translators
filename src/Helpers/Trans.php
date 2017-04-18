@@ -15,19 +15,17 @@ use Illuminate\Support\Facades\Cache;
 
 class Trans
 {
-    private static $_instance = null;
-
     public static function get($key, $default = '', $params = [], $lang=null, $preferCache=true) {
 
-        self::$_instance = new self();
+        $instance = new self();
 
         if($preferCache) {
 
-            $value = Cache::remember('cache-fitrans-' . $key . '-' . $lang, 3600, function () use ($key, $default, $params, $lang) {
-                return self::$_instance->getTranslation($key, $default, $params, $lang);
+            $value = Cache::remember('cache-fitrans-' . $key . '-' . $lang, 3600, function () use ($instance, $key, $default, $params, $lang) {
+                return $instance->getTranslation($key, $default, $params, $lang);
             });
         } else {
-            $value = self::$_instance->getTranslation($key, $default, $params, $lang);
+            $value = $instance->getTranslation($key, $default, $params, $lang);
         }
 
         return $value;
