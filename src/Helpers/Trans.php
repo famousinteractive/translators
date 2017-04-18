@@ -39,24 +39,22 @@ class Trans
 
     protected function getTranslation($key, $default, $params, $lang) {
 
-        $content = Content::where('key', $key)->whereHas('translations', function($q) use($lang) {
-            $q->where('lang', $lang);
-        })->first();
+        $content = Content::where('key', $key)->first();
+        $translation = ContentTranslation::where('content_id', $content->id)->where('lang', $lang)->first();
 
         if(empty($content)) {
+            $content = Content::create(['key' => $key]);
+        }
 
-            $content = Content::where('key', $key)->first();
-            if(empty($content)) {
-                $content = Content::create(['key' => $key]);
-            }
-            ContentTranslation::create([
+        if(empty($translation)) {
+            $translation = ContentTranslation::create([
                 'content_id'    => $content->id,
                 'lang'          => $lang,
                 'value'         => $default
             ]);
         }
 
-        return $this->replaceParameters($content->translations->first()->value, $params);
+        return $this->replaceParameters($translation->value, $params);
     }
 
     protected function getCurrentLang() {
