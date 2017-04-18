@@ -21,7 +21,9 @@ class Trans
 
         if($preferCache) {
 
-            $value = Cache::remember('cache-fitrans-' . $key . '-' . $lang, 3600, function () use ($instance, $key, $default, $params, $lang) {
+            $paramsString = md5(json_encode($params));
+
+            $value = Cache::remember('cache-fitrans-' . $key . '-' . $lang.'-params'.$paramsString, 3600, function () use ($instance, $key, $default, $params, $lang) {
                 return $instance->getTranslation($key, $default, $params, $lang);
             });
         } else {
