@@ -35,5 +35,6 @@ class TranslatorsServiceProvider extends ServiceProvider
 
         $this->app->make('Famousinteractive\Translators\Controllers\ApiController');
         $this->commands($this->commands);
+
     }
 }

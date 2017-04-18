@@ -10,6 +10,7 @@ namespace Famousinteractive\Translators\Helpers;
 
 
 use Famousinteractive\Translators\Models\Content;
+use Famousinteractive\Translators\Models\ContentTranslation;
 
 class Trans
 {
@@ -29,13 +30,14 @@ class Trans
 
         if(empty($content)) {
             $content = Content::create(['key', $key]);
-            $content->translation()->create([
-                'lang'  => $lang,
-                'value' => $default
+            ContentTranslation::create([
+                'content_id'    => $content->id,
+                'lang'          => $lang,
+                'value'         => $default
             ]);
         }
 
-        $value = self::$_instance->replaceParameters($content->translation()->value, $params);
+        $value = self::$_instance->replaceParameters($content->translations()->value, $params);
 
         return $value;
     }

@@ -64,7 +64,7 @@ class ApiController extends Controller
 
     public function getContentDatabase(Request $request) {
 
-        $translations = Content::with('translation')->get()->toArray();
+        $translations = Content::with('translations')->get()->toArray();
         return Response::json(['success' => true, 'data' => $translations]);
     }
 

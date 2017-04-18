@@ -12,7 +12,7 @@ class Content extends Model
         'id','key','description','html'
     ];
 
-    public function translation() {
+    public function translations() {
         return $this->hasMany('\Famousinteractive\Translators\Models\ContentTranslation', 'content_id','id');
     }
 }

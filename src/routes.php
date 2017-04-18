@@ -8,3 +8,6 @@
 
 Route::get('famousTranslators', 'Famousinteractive\Translators\Controllers\ApiController@getTranslation');
 Route::post('famousTranslators', 'Famousinteractive\Translators\Controllers\ApiController@postTranslation');
+
+Route::get('famousTranslatorsDatabase', 'Famousinteractive\Translators\Controllers\ApiController@getContentDatabase');
+Route::post('famousTranslatorsDatabase', 'Famousinteractive\Translators\Controllers\ApiController@postContentDatabase');
