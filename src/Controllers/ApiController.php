@@ -21,16 +21,16 @@ use Illuminate\Support\Facades\Response;
 class ApiController extends Controller
 {
 
-    public function __construct(Request $request)
-    {
+    public function check(Request $request) {
         $clientId   = $request->get('clientId');
         $apiKey     = $request->header('apiKey');
 
         $api = Api::getApi();
 
-        if(!$api->checkCredential($clientId, $apiKey)) {
-            return Response::json(['success' => false, 'message' => 'invalid credential']);
-            die;
+        if(is_null($apiKey) || !$api->checkCredential($clientId, $apiKey)) {
+            return false;
+        } else {
+            return true;
         }
     }
 
@@ -39,6 +39,10 @@ class ApiController extends Controller
      * @return mixed
      */
     public function getTranslation(Request $request) {
+
+        if(!$this->check($request)) {
+            return Response::json(['success' => false, 'message' => 'invalid credential']);
+        }
 
         $parser = new FileParser;
         return Response::json(['success' => true, 'data' => $parser->readFiles()->getJsonData()]);
@@ -49,6 +53,10 @@ class ApiController extends Controller
      * @return mixed
      */
     public function postTranslation(Request $request) {
+
+        if(!$this->check($request)) {
+            return Response::json(['success' => false, 'message' => 'invalid credential']);
+        }
 
         $writer = new FileWriter();
 
@@ -64,11 +72,19 @@ class ApiController extends Controller
 
     public function getContentDatabase(Request $request) {
 
+        if(!$this->check($request)) {
+            return Response::json(['success' => false, 'message' => 'invalid credential']);
+        }
+
         $translations = Content::with('translations')->get()->toArray();
         return Response::json(['success' => true, 'data' => $translations]);
     }
 
     public function postContentDatabase(Request $request) {
+
+        if(!$this->check($request)) {
+            return Response::json(['success' => false, 'message' => 'invalid credential']);
+        }
 
         $key = $request->get('key');
         $lang = $request->get('lang');
