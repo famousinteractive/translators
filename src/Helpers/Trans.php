@@ -19,6 +19,10 @@ class Trans
 
         $instance = new self();
 
+        if(is_null($lang)) {
+            $lang = $instance->getCurrentLang();
+        }
+
         if($preferCache) {
 
             $paramsString = md5(json_encode($params));
@@ -34,9 +38,6 @@ class Trans
     }
 
     protected function getTranslation($key, $default, $params, $lang) {
-        if(is_null($lang)) {
-            $lang = $this->getCurrentLang();
-        }
 
         $content = Content::where('key', $key)->whereHas('translations', function($q) use($lang) {
             $q->where('lang', $lang);
