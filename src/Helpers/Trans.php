@@ -37,7 +37,7 @@ class Trans
             ]);
         }
 
-        $value = self::$_instance->replaceParameters($content->translations()->value, $params);
+        $value = self::$_instance->replaceParameters($content->translations->value, $params);
 
         return $value;
     }
