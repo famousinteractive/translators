@@ -17,7 +17,7 @@ In addition of the translators, you can use the database content manager in orde
 
    - Launch the migration : `php artisan migrate`
    
-   - Add `'Fitrans'   => Famousinteractive\Translators\Helpers\Trans::class` in your Alias in config/app.php file
+   - Add `'Fitrans'   => Famousinteractive\Translators\Helpers\Trans::class` in your Alias in config/app.php file if you want to call the method directly. (optional)
    
-   - Use `fitrans($key = 'mypage.section1.title', [optional]  $default = 'default value', [optional]  $parameters = ['key' => 'value'], [optional] $lang = 'fr')` in the view
+   - Use `fitrans($key = 'mypage.section1.title', [optional]  $default = 'default value', [optional]  $parameters = ['key' => 'value'], [optional] $lang = 'fr', [optional] $useCache = true)` in the view
     

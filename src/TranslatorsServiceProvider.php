@@ -32,6 +32,7 @@ class TranslatorsServiceProvider extends ServiceProvider
     public function register()
     {
         include __DIR__.'/routes.php';
+        include __DIR__.'/Helpers/function.php';
 
         $this->app->make('Famousinteractive\Translators\Controllers\ApiController');
         $this->commands($this->commands);
