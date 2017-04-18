@@ -29,7 +29,7 @@ class Trans
         })->first();
 
         if(empty($content)) {
-            $content = Content::create(['key', $key]);
+            $content = Content::create(['key' => $key]);
             ContentTranslation::create([
                 'content_id'    => $content->id,
                 'lang'          => $lang,
