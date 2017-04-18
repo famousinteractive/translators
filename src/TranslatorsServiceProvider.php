@@ -10,7 +10,6 @@ class TranslatorsServiceProvider extends ServiceProvider
         'Famousinteractive\Translators\Commands\GenerateApiKey'
     ];
 
-
     /**
      * Bootstrap the application services.
      *
@@ -21,6 +20,8 @@ class TranslatorsServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/Config/famousTranslator.php' => config_path('famousTranslator.php'),
         ]);
+
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations/');
     }
 
     /**
