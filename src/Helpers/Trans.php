@@ -11,17 +11,31 @@ namespace Famousinteractive\Translators\Helpers;
 
 use Famousinteractive\Translators\Models\Content;
 use Famousinteractive\Translators\Models\ContentTranslation;
+use Illuminate\Support\Facades\Cache;
 
 class Trans
 {
     private static $_instance = null;
 
-    public static function get($key, $default = '', $params = [], $lang=null) {
+    public static function get($key, $default = '', $params = [], $lang=null, $preferCache=true) {
 
         self::$_instance = new self();
 
+        if($preferCache) {
+
+            $value = Cache::remember('cache-fitrans-' . $key . '-' . $lang, 3600, function () use ($key, $default, $params, $lang) {
+                return self::$_instance->getTranslation($key, $default, $params, $lang);
+            });
+        } else {
+            $value = self::$_instance->getTranslation($key, $default, $params, $lang);
+        }
+
+        return $value;
+    }
+
+    protected function getTranslation($key, $default, $params, $lang) {
         if(is_null($lang)) {
-            $lang = self::$_instance->getCurrentLang();
+            $lang = $this->getCurrentLang();
         }
 
         $content = Content::where('key', $key)->whereHas('translations', function($q) use($lang) {
@@ -37,9 +51,7 @@ class Trans
             ]);
         }
 
-        $value = self::$_instance->replaceParameters($content->translations->value, $params);
-
-        return $value;
+        return $this->replaceParameters($content->translations->first()->value, $params);
     }
 
     protected function getCurrentLang() {
@@ -57,6 +69,6 @@ class Trans
 
 }
 
-function fitrans($key, $default = '', $params = [], $lang=null) {
-    echo \Famousinteractive\Translators\Helpers\Trans::get($key, $default, $params, $lang);
+function fitrans($key, $default = '', $params = [], $lang=null, $preferCache=true) {
+    echo \Famousinteractive\Translators\Helpers\Trans::get($key, $default, $params, $lang,$preferCache);
 }
