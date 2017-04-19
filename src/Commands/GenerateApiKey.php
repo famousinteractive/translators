@@ -44,9 +44,13 @@ class GenerateApiKey extends Command
         $clientId = str_random(40);
         $key = str_random(80);
 
+        $lang = $this->ask('Enter the language to activate. Use a coma to separate them', 'nl,fr');
+        $lang = explode(',', $lang);
+
         $credentials = [
             'clientId'    => $clientId,
             'key'         => \Hash::make($key),
+            'lang'        => $lang,
         ];
 
         $fp = fopen(config_path('famousTranslator.php') , 'w');

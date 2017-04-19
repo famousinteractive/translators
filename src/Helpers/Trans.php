@@ -54,6 +54,19 @@ class Trans
             ]);
         }
 
+        //Generate missing translation for each language
+
+        foreach(config('famousTranslator.lang') as $language) {
+            $translationCount = ContentTranslation::where('content_id', $content->id)->where('lang', $language)->count();
+            if($translationCount == 0) {
+                ContentTranslation::create([
+                    'content_id'    => $content->id,
+                    'lang'          => $language,
+                    'value'         => $default
+                ]);
+            }
+        }
+
         return $this->replaceParameters($translation->value, $params);
     }
 
