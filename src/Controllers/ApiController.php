@@ -135,7 +135,10 @@ class ApiController extends Controller
 
         return Response::json([
             'success'   => true,
-            'data'      => $files,
+            'data'      => [
+                'files' => $files,
+                'disks' => config('famousTranslator.disks')
+            ],
         ]);
     }
 
@@ -160,8 +163,15 @@ class ApiController extends Controller
 
         $file = $request->transfile->store('fitrans', $request->get('disk'));
 
+        File::create([
+            'name'  => $file,
+            'disk'  => $request->get('disk'),
+            'url'   => $file
+        ]);
+
         return Response::json([
-            'r' => $file
+            'success'   => 'maybe',
+            'file' => $file
         ]);
     }
 
