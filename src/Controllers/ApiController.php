@@ -151,8 +151,7 @@ class ApiController extends Controller
 
         return Response::json([
             'success'   => true,
-            'data'      => $file,
-            'file'      => Storage::disk($file->disk)->get($file->name),
+            'data'      => $file
         ]);
     }
 
@@ -166,7 +165,7 @@ class ApiController extends Controller
         File::create([
             'name'  => $file,
             'disk'  => $request->get('disk'),
-            'url'   => $file
+            'url'   => Storage::url($file)
         ]);
 
         return Response::json([
