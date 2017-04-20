@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 class TranslatorsServiceProvider extends ServiceProvider
 {
     protected $commands = [
-        'Famousinteractive\Translators\Commands\GenerateApiKey'
+        'Famousinteractive\Translators\Commands\Initialize'
     ];
 
     /**
