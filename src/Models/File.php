@@ -8,6 +8,6 @@ class File extends Model
 {
     protected $table = 'famousinteractiveTranslators_file';
     public $timestamps = true;
-    protected $fillable = ['name', 'url','disk'];
+    protected $fillable = ['name', 'url','disk','container'];
 
 }

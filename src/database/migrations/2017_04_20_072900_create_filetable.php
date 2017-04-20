@@ -18,6 +18,7 @@ class CreateFiletable extends Migration
             $table->string('name')->nullable();
             $table->string('url');
             $table->string('disk')->default('public');
+            $table->string('container')->default('default');
             $table->timestamps();
         });
     }

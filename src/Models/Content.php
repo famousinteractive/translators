@@ -9,7 +9,7 @@ class Content extends Model
     protected $table = 'famousinteractiveTranslators_content';
     public $timestamps = true;
     protected $fillable = [
-        'id','key','description','html'
+        'id','key','description','html','container'
     ];
 
     public function translations() {

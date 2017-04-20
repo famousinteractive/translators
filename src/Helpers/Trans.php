@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Cache;
 
 class Trans
 {
-    public static function get($key, $default = '', $params = [], $lang=null, $preferCache=true) {
+    public static function get($key, $default = '', $params = [], $container = 'default', $lang=null, $preferCache=true) {
 
         $instance = new self();
 
@@ -27,23 +27,23 @@ class Trans
 
             $paramsString = md5(json_encode($params));
 
-            $value = Cache::remember('cache-fitrans-' . $key . '-' . $lang.'-params'.$paramsString, 3600, function () use ($instance, $key, $default, $params, $lang) {
-                return $instance->getTranslation($key, $default, $params, $lang);
+            $value = Cache::remember('cache-fitrans-' . $key . '-' . $container .'-' . $lang.'-params'.$paramsString, 3600, function () use ($instance, $key, $default, $params, $lang) {
+                return $instance->getTranslation($key, $default, $params, $lang, $container);
             });
         } else {
-            $value = $instance->getTranslation($key, $default, $params, $lang);
+            $value = $instance->getTranslation($key, $default, $params, $lang, $container);
         }
 
         return $value;
     }
 
-    protected function getTranslation($key, $default, $params, $lang) {
+    protected function getTranslation($key, $default, $params, $lang, $container) {
 
-        $content = Content::where('key', $key)->first();
+        $content = Content::where('key', $key)->where('container', $container)->first();
         $translation = ContentTranslation::where('content_id', $content->id)->where('lang', $lang)->first();
 
         if(empty($content)) {
-            $content = Content::create(['key' => $key]);
+            $content = Content::create(['key' => $key, 'container' => $container]);
         }
 
         if(empty($translation)) {
@@ -85,6 +85,6 @@ class Trans
 
 }
 
-function fitrans($key, $default = '', $params = [], $lang=null, $preferCache=true) {
-    echo \Famousinteractive\Translators\Helpers\Trans::get($key, $default, $params, $lang,$preferCache);
+function fitrans($key, $default = '', $params = [], $container = 'default', $lang=null, $preferCache=true) {
+    echo \Famousinteractive\Translators\Helpers\Trans::get($key, $default, $params, $container, $lang,$preferCache);
 }

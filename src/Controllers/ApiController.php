@@ -91,8 +91,9 @@ class ApiController extends Controller
         $key = $request->get('key');
         $lang = $request->get('lang');
         $value = $request->get('value');
+        $container = $request->get('container', 'default');
 
-        $content = Content::where('key', $key)->first();
+        $content = Content::where('key', $key)->where('container', $container)->first();
 
         if(empty($contentId)) {
             return Response::json(['success' => false, 'message' => 'The key' . $key . 'doesn\'t exists']);
@@ -104,6 +105,7 @@ class ApiController extends Controller
 
         $content->html = $html;
         $content->description = $description;
+        $content->container = $container;
         $content->save();
 
         //Save the translation
