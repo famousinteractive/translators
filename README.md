@@ -9,7 +9,7 @@ Open laravel project to external translation
     
   - Publish the config file : `php artisan vendor:publish` 
   
-  - Launch the command `php artisan famousTranslators:generateApiKey` to get a clientId and ApiKey
+  - Launch the command `php artisan famousTranslators:initialize` to get a clientId and ApiKey and generate config file
 
 ## Using the Database content manager
 
