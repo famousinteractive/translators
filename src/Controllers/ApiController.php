@@ -162,7 +162,7 @@ class ApiController extends Controller
 
         $file = $request->transfile->store('fitrans', $request->get('disk'));
         $disk = $request->get('disk');
-        $driver = config('filesystems.disks.'.$disk.'.drive');
+        $driver = config('filesystems.disks.'.$disk.'.driver');
 
         File::create([
             'name'  => $file,
