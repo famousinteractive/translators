@@ -180,12 +180,22 @@ class ApiController extends Controller
             return Response::json(['success' => false, 'message' => 'invalid credential']);
         }
 
-        $file = File::find($fileId);
+        try {
+            $file = File::findorfail($fileId);
 
-        $name = $file->name;
-        $disk = $file->disk;
-        $file->delete();
-        Storage::disk($disk)->delete('fitrans/'.$name);
+            $name = $file->name;
+            $disk = $file->disk;
+            $file->delete();
+            Storage::disk($disk)->delete($name);
+        } catch (\Exception $e) {
+            return Response::json([
+                'success'   => false,
+                'message'   => $e->getMessage()
+            ]);
+        }
 
+        return Response::json([
+            'success'   => true,
+        ]);
     }
 }
