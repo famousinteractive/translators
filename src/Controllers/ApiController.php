@@ -15,8 +15,10 @@ use Famousinteractive\Translators\Library\FileParser;
 use Famousinteractive\Translators\Library\FileWriter;
 use Famousinteractive\Translators\Models\Content;
 use Famousinteractive\Translators\Models\ContentTranslation;
+use Famousinteractive\Translators\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Storage;
 
 class ApiController extends Controller
 {
@@ -123,4 +125,57 @@ class ApiController extends Controller
         return Response::json(['success' => true]);
     }
 
+    public function getFiles(Request $request) {
+
+        if(!$this->check($request)) {
+            return Response::json(['success' => false, 'message' => 'invalid credential']);
+        }
+
+        $files = File::all();
+
+        return Response::json([
+            'success'   => true,
+            'data'      => $files,
+        ]);
+    }
+
+    public function getFile(Request $request, $fileId) {
+        if(!$this->check($request)) {
+            return Response::json(['success' => false, 'message' => 'invalid credential']);
+        }
+
+        $file = File::find($fileId);
+
+        return Response::json([
+            'success'   => true,
+            'data'      => $file,
+            'file'      => Storage::disk($file->disk)->get($file->name),
+        ]);
+    }
+
+    public function postFile(Request $request) {
+        if(!$this->check($request)) {
+            return Response::json(['success' => false, 'message' => 'invalid credential']);
+        }
+
+        $file = $request->transfile->store('fitrans', $request->get('disk'));
+
+        return Response::json([
+            'r' => $file
+        ]);
+    }
+
+    public function deleteFile(Request $request, $fileId) {
+        if(!$this->check($request)) {
+            return Response::json(['success' => false, 'message' => 'invalid credential']);
+        }
+
+        $file = File::find($fileId);
+
+        $name = $file->name;
+        $disk = $file->disk;
+        $file->delete();
+        Storage::disk($disk)->delete('fitrans/'.$name);
+
+    }
 }
