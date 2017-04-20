@@ -18,7 +18,6 @@ class CreateContentTable extends Migration
             $table->string('key')->unique('fit_content_unique');
             $table->string('description')->nullable();
             $table->boolean('html')->default(0);
-            $table->string('container')->default('default');
             $table->timestamps();
         });
     }
