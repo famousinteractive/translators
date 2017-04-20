@@ -19,3 +19,7 @@ In addition of the translators, you can use the database content manager in orde
    
    - Use `fitrans($key = 'mypage.section1.title', [optional]  $default = 'default value', [optional]  $parameters = ['key' => 'value'], [optional] $lang = 'fr', [optional] $useCache = true)` in the view
     
+    
+## Good to know
+    
+If you want to use different api key for you local and production, take care to put the famousTranslator.php config file n your gitignore     
